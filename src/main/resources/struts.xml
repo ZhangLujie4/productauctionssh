@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <!-- 表示从cn包下开始扫描 -->
+    <constant name="struts.convention.package.locators.basePackage" value="com.action"></constant>
+    <!-- 表示从cn包下开始加载注解 -->
+    <constant name="struts.convention.package.locators" value="com.action"></constant>
+    <!-- 表示struts的工厂类交给Spring实例 -->
+    <constant name="struts.objectFactory" value="spring"></constant>
+    <!--
+        SpringBoot集成struts2这个必须要配置
+        表示不把SpringBoot内置Tomcat的类加载器排除在外
+         默认是true 将类加载器排除了所以就算上面配置
+        如果这个没有配置就算运行不报错但是Action还是访问不了
+    -->
+    <constant name="struts.convention.exclude.parentClassLoader" value="false"></constant>
+
+    <bean type="org.apache.struts2.dispatcher.multipart.MultiPartRequest"
+          name="myRequestParser" class="com.util.RequestParseWrapper"
+          scope="default" optional="true" />
+    <constant name="struts.multipart.handler" value="myRequestParser" />
+
+    <package name="liu" extends="struts-default">
+        <!-- Sysuser -->
+        <action name="adminLogin" class="com.action.SysuserAction" method="adminLogin">
+            <result name="success">/admin/index.jsp</result>
+            <result name="err">/admin/login.jsp</result>
+            <result name="no">/admin/login.jsp</result>
+        </action>
+        <action name="adminExit" class="com.action.SysuserAction" method="adminExit">
+            <result name="success">/admin/login.jsp</result>
+        </action>
+        <action name="adminEdit" class="com.action.SysuserAction" method="adminEdit">
+            <result name="success">/admin/usersmanager.jsp</result>
+        </action>
+        <action name="adminAdd" class="com.action.SysuserAction" method="adminAdd">
+            <result name="success">/admin/usersadd.jsp</result>
+            <result name="error">/admin/usersadd.jsp</result>
+        </action>
+        <action name="adminDel" class="com.action.SysuserAction" method="adminDel">
+            <result name="success">/admin/usersmanager.jsp</result>
+        </action>
+        <!--  <action name="usernamecheck" class="SysuserAction" method="usernamecheck">
+        </action>-->
+
+        <action name="passEdit" class="com.action.SysuserAction" method="passEdit">
+            <result name="success">/admin/modifypw.jsp</result>
+        </action>
+
+
+        <action name="uploadImg" class="com.action.UploadAction" >
+        </action>
+
+
+
+
+
+        <!-- goods -->
+        <action name="goodsAdd" class="com.action.GoodsAction" method="goodsAdd">
+            <result name="success">/e/productlist.jsp</result>
+        </action>
+        <action name="goodsEdit" class="com.action.GoodsAction" method="goodsEdit">
+            <result name="success">/e/productlist.jsp</result>
+        </action>
+        <action name="goodsDel" class="com.action.GoodsAction" method="goodsDel">
+            <result name="success">/admin/goodslist.jsp</result>
+        </action>
+
+        <action name="prodcutDel" class="com.action.GoodsAction" method="prodcutDel">
+            <result name="success">/e/productlist.jsp</result>
+        </action>
+
+
+        <action name="paichu" class="com.action.GoodsAction" method="paichu">
+            <result name="success">/e/index.jsp</result>
+        </action>
+
+        <action name="changestatus" class="com.action.GoodsAction" method="changestatus">
+            <result name="success">/e/index.jsp</result>
+        </action>
+
+        <action name="xiaoJia" class="com.action.GoodsAction" method="xiaoJia">
+            <result name="success">/admin/goodslist.jsp</result>
+        </action>
+
+        <action name="shangJia" class="com.action.GoodsAction" method="shangJia">
+            <result name="success">/admin/goodslist.jsp</result>
+        </action>
+
+
+
+
+
+        <action name="ddinfoDel" class="com.action.GoodsAction" method="ddinfoDel">
+            <result name="success">/admin/dingdanmanager.jsp</result>
+        </action>
+
+
+        <!-- notice -->
+        <action name="noticeAdd" class="com.action.NoticeAction" method="noticeAdd">
+            <result name="success">/admin/noticelist.jsp</result>
+        </action>
+        <action name="noticeEdit" class="com.action.NoticeAction" method="noticeEdit">
+            <result name="success">/admin/noticelist.jsp</result>
+        </action>
+        <action name="noticeDel" class="com.action.NoticeAction" method="noticeDel">
+            <result name="success">/admin/noticelist.jsp</result>
+        </action>
+
+        <!-- yqlj -->
+        <action name="yqljAdd" class="com.action.YqljAction" method="yqljAdd">
+            <result name="success">/admin/yqljlist.jsp</result>
+        </action>
+        <action name="yqljEdit" class="com.action.YqljAction" method="yqljEdit">
+            <result name="success">/admin/yqljlist.jsp</result>
+        </action>
+        <action name="yqljDel" class="com.action.YqljAction" method="yqljDel">
+            <result name="success">/admin/yqljlist.jsp</result>
+        </action>
+
+        <!-- member -->
+        <action name="memberLogin" class="com.action.MemberAction" method="memberLogin">
+            <result name="success">/e/accountinfo.jsp</result>
+            <result name="error">/e/login.jsp</result>
+        </action>
+
+        <action name="memberRegist" class="com.action.MemberAction" method="memberRegist">
+            <result name="success">/e/regresult.jsp</result>
+        </action>
+
+        <action name="usernamecheck" class="com.action.MemberAction" method="usernamecheck">
+        </action>
+
+        <action name="memberExit" class="com.action.MemberAction" method="memberExit">
+            <result name="success">/e/index.jsp</result>
+        </action>
+
+        <action name="memberEdit" class="com.action.MemberAction" method="memberEdit">
+            <result name="success">/e/editsuccess.jsp</result>
+        </action>
+
+        <action name="upassEdit" class="com.action.MemberAction" method="upassEdit">
+            <result name="success">/e/editsuccess.jsp</result>
+        </action>
+
+        <action name="chongZhi" class="com.action.MemberAction" method="chongZhi">
+            <result name="success">/e/chongzhiresult.jsp</result>
+        </action>
+
+        <action name="memberDel" class="com.action.MemberAction" method="memberDel">
+            <result name="success">/admin/huiyuanmanager.jsp</result>
+        </action>
+        <action name="mbEdit" class="com.action.MemberAction" method="mbEdit">
+            <result name="success">/admin/huiyuanmanager.jsp</result>
+        </action>
+
+
+
+
+
+        <!-- pingjia -->
+        <action name="pingjiaAdd" class="com.action.PingjiaAction" method="pingjiaAdd">
+            <result name="success">/e/goodsinfo.jsp</result>
+            <result name="error">/e/login.jsp</result>
+        </action>
+        <action name="pingjiaDel" class="com.action.PingjiaAction" method="pingjiaDel">
+            <result name="success">/admin/pingjialist.jsp</result>
+        </action>
+
+        <!-- liuyan -->
+        <action name="liuyanAdd" class="com.action.LiuyanAction" method="liuyanAdd">
+            <result name="success">/e/liuyan.jsp</result>
+        </action>
+        <action name="liuyanDel" class="com.action.LiuyanAction" method="liuyanDel">
+            <result name="success">/admin/liuyanlist.jsp</result>
+        </action>
+        <action name="liuyanHf" class="com.action.LiuyanAction" method="liuyanHf">
+            <result name="success">/admin/liuyanlist.jsp</result>
+        </action>
+
+        <!-- Imgv -->
+        <action name="imgvAdd" class="com.action.ImgvAction" method="imgvAdd">
+            <result name="success">/admin/imglist.jsp</result>
+        </action>
+        <action name="imgvEdit" class="com.action.ImgvAction" method="imgvEdit">
+            <result name="success">/admin/imglist.jsp</result>
+        </action>
+        <action name="imgvDel" class="com.action.ImgvAction" method="imgvDel">
+            <result name="success">/admin/imglist.jsp</result>
+        </action>
+
+
+        <!-- Gongneng -->
+        <action name="fatherAdd" class="com.action.GongnengAction" method="fatherAdd">
+            <result name="success">/admin/gongnenglist.jsp</result>
+        </action>
+        <action name="fatherEdit" class="com.action.GongnengAction" method="fatherEdit">
+            <result name="success">/admin/gongnenglist.jsp</result>
+        </action>
+        <action name="gongnengDel" class="com.action.GongnengAction" method="gongnengDel">
+            <result name="success">/admin/gongnenglist.jsp</result>
+        </action>
+
+
+
+        <!-- Juese -->
+        <action name="jueseAdd" class="com.action.JueseAction" method="jueseAdd">
+            <result name="success">/admin/jueselist.jsp</result>
+        </action>
+        <action name="jueseEdit" class="com.action.JueseAction" method="jueseEdit">
+            <result name="success">/admin/jueselist.jsp</result>
+        </action>
+        <action name="jueseDel" class="com.action.JueseAction" method="jueseDel">
+            <result name="success">/admin/jueselist.jsp</result>
+        </action>
+        <!-- ShouquanAction -->
+        <action name="ShouquanEdit" class="com.action.ShouquanAction" method="ShouquanEdit">
+            <result name="success">/admin/shouquanlist.jsp</result>
+        </action>
+
+        <!-- Jingjia -->
+        <action name="jingjiaAdd" class="com.action.JingjiaAction" method="jingjiaAdd">
+            <result name="success">/e/success.jsp</result>
+        </action>
+
+
+        <!-- Producttype -->
+        <action name="producttypeAdd" class="com.action.ProducttypeAction" method="producttypeAdd">
+            <result name="success">/admin/producttypelist.jsp</result>
+        </action>
+        <action name="producttypeEdit" class="com.action.ProducttypeAction" method="producttypeEdit">
+            <result name="success">/admin/producttypelist.jsp</result>
+        </action>
+        <action name="producttypeDel" class="com.action.ProducttypeAction" method="producttypeDel">
+            <result name="success">/admin/producttypelist.jsp</result>
+        </action>
+
+        <!-- car -->
+        <action name="fuKuan" class="com.action.CarAction" method="fuKuan">
+            <result name="success">/e/myorder.jsp</result>
+        </action>
+
+        <action name="faHuo" class="com.action.CarAction" method="faHuo">
+            <result name="success">/e/saleorder.jsp</result>
+        </action>
+
+        <action name="qianShou" class="com.action.CarAction" method="qianShou">
+            <result name="success">/e/myorder.jsp</result>
+        </action>
+
+        <action name="tuiHuo" class="com.action.CarAction" method="tuiHuo">
+            <result name="success">/e/myorder.jsp</result>
+        </action>
+
+        <action name="jjtuiHuo" class="com.action.CarAction" method="jjtuiHuo">
+            <result name="success">/e/saleorder.jsp</result>
+        </action>
+
+        <action name="tytuiHuo" class="com.action.CarAction" method="tytuiHuo">
+            <result name="success">/e/saleorder.jsp</result>
+        </action>
+
+        <!-- score -->
+        <action name="scoreAdd" class="com.action.ScoreAction" method="scoreAdd">
+            <result name="success">/e/pingfenlist.jsp</result>
+        </action>
+
+        <action name="pingfenDel" class="com.action.ScoreAction" method="pingfenDel">
+            <result name="success">/e/pingfenlist.jsp</result>
+        </action>
+
+        <!-- jubao -->
+        <action name="jubaoAdd" class="com.action.JubaoAction" method="jubaoAdd">
+            <result name="success">/e/jubaolist.jsp</result>
+        </action>
+
+        <action name="jubaoDel" class="com.action.JubaoAction" method="jubaoDel">
+            <result name="success">/e/jubaolist.jsp</result>
+        </action>
+
+        <action name="jubaoHf" class="com.action.JubaoAction" method="jubaoHf">
+            <result name="success">/admin/jubaolist.jsp</result>
+        </action>
+
+
+        <action name="favDel" class="com.action.LishiAction" method="favDel">
+            <result name="success">/e/myfav.jsp</result>
+        </action>
+
+    </package>
+</struts>

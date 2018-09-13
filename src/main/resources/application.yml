@@ -1,0 +1,17 @@
+spring:
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp,.tld
+  application:
+    name: productauctionssh
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/productauctionssh_db?useSSL=false&characterEncoding=utf-8
+    username: root
+    password: zhanglujie
+    driver-class-name: com.mysql.jdbc.Driver
+server:
+  context-path: /productauctionssh
+  port: 8080
+dmz:
+  projectUrl: http://localhost:${server.port}${server.context-path}
